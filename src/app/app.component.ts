@@ -12,6 +12,7 @@ import { NotificacaoService } from 'src/services/notificacao.service';
 export class AppComponent {
   title = 'File Drop';
 
+
   constructor( private sanitizer: DomSanitizer,private notificacaoService: NotificacaoService){}
 
   public files: NgxFileDropEntry[] = [];
