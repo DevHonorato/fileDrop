@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+.ngx-file-drop__drop-zone {
+    border: 2px dotted #3671f9 !important;
+    border-radius: 20px !important;
+    height: 100px !important;
+    margin: auto !important;
+}
+
+.ngx-file-drop__drop-zone--over {
+    background-color: #e9efff !important;
+    border: 2px solid #3671f9 !important;
+}
+
+.ngx-file-drop__content {
+    align-items: center !important;
+    color: #3671f9 !important;
+    display: flex !important;
+    height: 100px !important;
+    justify-content: space-evenly !important;
+    flex-direction: column !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

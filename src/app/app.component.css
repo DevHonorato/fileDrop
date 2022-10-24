@@ -1,0 +1,38 @@
+.upload-galeria {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.cartao-personalizado {
+    width: 105px !important;
+    height: 110px !important;
+    margin: 5px;
+    border-color: #d9d9d9;
+}
+
+.cartao-imagem {
+    height: 90px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.cartao-corpo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #242424;
+    border-top: 1px solid #d9d9d9;
+}
+
+.cartao-titulo {
+    text-align: center;
+    margin: 0px;
+    font-size: 10px;
+}
