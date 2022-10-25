@@ -15,26 +15,29 @@
                 </ngx-file-drop>
             </div>
 
-            <div *ngIf="file.length != 0">
+            <div *ngIf="file.length != 0" style=" display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; flex-direction: row; ">
                 <h2>Galeria</h2>
+                <button type="button" class="btn btn-sm" (click)="limparGaleria()"> Limpar galeria </button>
             </div>
-            <div class="upload-galeria" *ngIf="file.length != 0">
+            <div class="upload-galeria" *ngIf="file.length != 0" [dndDropzone]="[]" (dndDrop)="onDrop($event, file)">
 
+                <div dndPlaceholderRef class="dndPlaceholder">
+                </div>
+                <div class="card cartao-personalizado" *ngFor="let item of file; let i=index" [dndDraggable]="item" [dndEffectAllowed]="'copyMove'" [dndDisableIf]="false" (dndMoved)="onDragged(item, file, 'move')">
 
-                <div class="card cartao-personalizado" *ngFor="let item of file; let i=index">
-                    <div *ngIf="item[0].type.includes('image')">
+                    <div *ngIf="item.type.includes('image')">
                         <!-- <img [src]="item[1].url" class="card-img-top" alt="..."> -->
-                        <div class="cartao-imagem" style="background-image: url('{{item[1].url['changingThisBreaksApplicationSecurity']}}');">
+                        <div class="cartao-imagem" style="background-image: url('{{item.url['changingThisBreaksApplicationSecurity']}}')">
 
                         </div>
                     </div>
-                    <div *ngIf="!item[0].type.includes('image')">
+                    <div *ngIf="!item.type.includes('image')">
                         <div class="cartao-imagem" style="background-image: url('../assets/img/file.jpg');">
 
                         </div>
                     </div>
                     <div class="card-body p-0 m-0 cartao-corpo">
-                        <small class="card-title cartao-titulo">{{redutorDeNome(item[0].name, 19)}}</small>
+                        <small class="card-title cartao-titulo">{{redutorDeNome(item.name, 19)}}</small>
                         <!-- <p class="card-text">{{ item[0].type }}</p>
                           <a [href]="item[1].url" target="_blank" class="btn btn-primary">Abrir</a> -->
                     </div>
@@ -42,7 +45,10 @@
 
                 </div>
 
+
+
             </div>
+
 
         </div>
     </div>
