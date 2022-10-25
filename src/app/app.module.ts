@@ -8,6 +8,16 @@ import { AppComponent } from './app.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DndModule } from 'ngx-drag-drop';
+
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatCardModule } from "@angular/material/card";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatIconModule } from "@angular/material/icon";
+import { MatListModule } from "@angular/material/list";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -18,7 +28,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppRoutingModule,
     NgxFileDropModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DndModule,
+    MatButtonModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatListModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

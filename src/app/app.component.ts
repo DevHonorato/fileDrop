@@ -1,7 +1,15 @@
-import { Component } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { NotificacaoService } from 'src/services/notificacao.service';
+import {DndDropEvent, DropEffect} from "ngx-drag-drop";
+
+class FileEdit {
+  name?:   string;
+  type?:   string;
+  url?:    SafeUrl;
+}
+
 
 @Component({
   selector: 'app-root',
@@ -12,8 +20,13 @@ import { NotificacaoService } from 'src/services/notificacao.service';
 export class AppComponent {
   title = 'File Drop';
 
+  constructor( private sanitizer: DomSanitizer,private notificacaoService: NotificacaoService){
 
-  constructor( private sanitizer: DomSanitizer,private notificacaoService: NotificacaoService){}
+  }
+
+  OnInit(): void{
+
+  }
 
   public files: NgxFileDropEntry[] = [];
   public file: any[] = [];
@@ -28,13 +41,26 @@ export class AppComponent {
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file(async (file: File) => {
+        fileEntry.file((file: File) => {
 
           try {
             const url = this.generatorUrl(file);
-            const array = [file,{'url': url}];
+            let array = [file];
 
-            this.file.push(array)
+            let novoArray = new FileEdit();
+
+            for (let index = 0; index < array.length; index++) {
+              const element = array[index];
+
+              novoArray.name = element.name;
+              novoArray.type = element.type;
+
+            }
+
+            novoArray.url = url;
+
+            console.log(novoArray)
+            this.file.push(novoArray)
 
             // Here you can access the real file
             console.log(droppedFile.relativePath, file);
@@ -110,6 +136,40 @@ export class AppComponent {
 
     }
     return nome;
+  }
+
+  limparGaleria(){
+    this.files = [];
+    this.file = [];
+
+  }
+
+
+
+  onDragged( item:any, list:any[], effect:DropEffect ) {
+
+    if( effect === "move" ) {
+
+      const index = list.indexOf( item );
+      list.splice( index, 1 );
+    }
+  }
+
+  onDrop( event:DndDropEvent, list?:any[] ) {
+
+    if( list
+      && (event.dropEffect === "copy"
+        || event.dropEffect === "move") ) {
+
+      let index = event.index;
+
+      if( typeof index === "undefined" ) {
+
+        index = list.length;
+      }
+
+      list.splice( index, 0, event.data );
+    }
   }
 
 }
