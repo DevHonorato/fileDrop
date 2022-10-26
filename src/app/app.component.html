@@ -15,19 +15,21 @@
                 </ngx-file-drop>
             </div>
 
-            <div *ngIf="file.length != 0" style=" display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; flex-direction: row; ">
+            <div *ngIf="processedImages.length != 0" style=" display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; flex-direction: row; ">
                 <h2>Galeria</h2>
                 <button type="button" class="btn btn-sm" (click)="limparGaleria()"> Limpar galeria </button>
             </div>
-            <div class="upload-galeria" *ngIf="file.length != 0" [dndDropzone]="[]" (dndDrop)="onDrop($event, file)">
+
+            <div class="upload-galeria" *ngIf="processedImages.length != 0" [dndDropzone]="[]" (dndDrop)="onDrop($event, processedImages)">
 
                 <div dndPlaceholderRef class="dndPlaceholder">
                 </div>
-                <div class="card cartao-personalizado" *ngFor="let item of file; let i=index" [dndDraggable]="item" [dndEffectAllowed]="'copyMove'" [dndDisableIf]="false" (dndMoved)="onDragged(item, file, 'move')">
+
+                <div class="card cartao-personalizado" *ngFor="let item of processedImages; let i=index" [dndDraggable]="item" [dndEffectAllowed]="'copyMove'" [dndDisableIf]="false" (dndMoved)="onDragged(item, processedImages, 'move')">
 
                     <div *ngIf="item.type.includes('image')">
                         <!-- <img [src]="item[1].url" class="card-img-top" alt="..."> -->
-                        <div class="cartao-imagem" style="background-image: url('{{item.url['changingThisBreaksApplicationSecurity']}}')">
+                        <div class="cartao-imagem" style="background-image: url('{{item.compressedImage.imageDataUrl}}')">
 
                         </div>
                     </div>
@@ -37,7 +39,7 @@
                         </div>
                     </div>
                     <div class="card-body p-0 m-0 cartao-corpo">
-                        <small class="card-title cartao-titulo">{{redutorDeNome(item.name, 19)}}</small>
+                        <small class="card-title cartao-titulo">{{redutorDeNome(item.compressedImage.fileName, 19)}}</small>
                         <!-- <p class="card-text">{{ item[0].type }}</p>
                           <a [href]="item[1].url" target="_blank" class="btn btn-primary">Abrir</a> -->
                     </div>
@@ -46,6 +48,25 @@
                 </div>
 
 
+
+            </div>
+
+
+            <div>
+                <!-- <input id="inputImage" type="file" accept="image/*" (change)="onChange($event)" multiple /> -->
+                <!-- <b *ngIf="showTitle">Original Image List</b>
+
+                <div *ngFor="let item of processedImages">
+                    <img src="{{item.imageDataUrl}}">
+                </div> -->
+
+                <!-- <b *ngIf="showTitle">Compressed Image List</b>
+                <div style="display: flex;flex-direction: row;flex-wrap: wrap;align-items: center;">
+                    <div *ngFor="let item of processedImages">
+                        <img src="{{item.compressedImage.imageDataUrl}}" height="200" style="margin: 5px;">
+                        <p>{{item.compressedImage.fileName}}</p>
+                    </div>
+                </div> -->
 
             </div>
 

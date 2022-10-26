@@ -19,6 +19,9 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatTabsModule } from "@angular/material/tabs";
 
+import { ImageCompressService,ResizeOptions,ImageUtilityService } from 'ng2-image-compress';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -39,7 +42,7 @@ import { MatTabsModule } from "@angular/material/tabs";
     MatListModule,
     MatTabsModule
   ],
-  providers: [],
+  providers: [ImageCompressService,ResizeOptions],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
