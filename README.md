@@ -2,8 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
-npm i ngx-file-drop@12.0.0 --save
-
+<!-- npm i ngx-file-drop@12.0.0 --save
+ng build --prod --base-href "/fileDrop" 
+git add dist --force
+git commit -m "gh-pages"
+git subtree push --prefix dist origin gh-pages -->
 
 ## Development server
 

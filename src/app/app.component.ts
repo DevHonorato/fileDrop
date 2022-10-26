@@ -4,6 +4,9 @@ import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 
 import { NotificacaoService } from 'src/services/notificacao.service';
 import {DndDropEvent, DropEffect} from "ngx-drag-drop";
 
+import { ImageCompressService, ResizeOptions, ImageUtilityService, IImage, SourceImage } from  'ng2-image-compress';
+
+
 class FileEdit {
   name?:   string;
   type?:   string;
@@ -20,7 +23,11 @@ class FileEdit {
 export class AppComponent {
   title = 'File Drop';
 
-  constructor( private sanitizer: DomSanitizer,private notificacaoService: NotificacaoService){
+  selectedImage: any;
+  processedImages: any = [];
+  showTitle: boolean = false;
+
+  constructor( private sanitizer: DomSanitizer,private notificacaoService: NotificacaoService,private imgCompressService: ImageCompressService){
 
   }
 
@@ -30,6 +37,7 @@ export class AppComponent {
 
   public files: NgxFileDropEntry[] = [];
   public file: any[] = [];
+  public fileCompress: any[] = [];
 
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
@@ -44,6 +52,7 @@ export class AppComponent {
         fileEntry.file((file: File) => {
 
           try {
+
             const url = this.generatorUrl(file);
             let array = [file];
 
@@ -61,6 +70,8 @@ export class AppComponent {
 
             console.log(novoArray)
             this.file.push(novoArray)
+            this.onChange([file])
+            this.fileCompress.push(file)
 
             // Here you can access the real file
             console.log(droppedFile.relativePath, file);
@@ -95,6 +106,9 @@ export class AppComponent {
 
     // setTimeout(() => {
     //   this.notificacaoService.showSnackBar(errors, 'OK', 'background-padrao-snackbar', 'left', 'top', 2000);
+    // }, 2000);
+    // setTimeout(() => {
+    //   this.onChange(this.fileCompress)
     // }, 2000);
   }
 
@@ -141,6 +155,8 @@ export class AppComponent {
   limparGaleria(){
     this.files = [];
     this.file = [];
+    this.fileCompress = [];
+    this.processedImages = [];
 
   }
 
@@ -171,5 +187,54 @@ export class AppComponent {
       list.splice( index, 0, event.data );
     }
   }
+
+
+  onChange(fileInput: any) {
+    let fileList: FileList;
+
+    let images: Array<IImage> = [];
+
+    let option: ResizeOptions = new ResizeOptions();
+
+    option.Resize_Quality = 55;
+    option.Resize_Max_Width = 1800;
+    option.Resize_Max_Height = 1800;
+
+    ImageCompressService.filesToCompressedImageSourceEx(fileInput, option ).then(observableImages => {
+      observableImages.subscribe((image) => {
+        images.push(image);
+
+        this.processedImages.push(image);
+
+        // const src = image.imageDataUrl;
+        // const base64str = src.split('base64,')[1];
+        // const decoded = btoa(base64str);
+        // console.log("FileSize: " + decoded.length);
+
+      }, (error) => {
+        console.log("Error while converting");
+      }, () => {
+                // this.processedImages = images;
+                this.showTitle = true;
+      });
+    });
+
+    // or you can pass File[]
+    // let files: File[] = Array.from(fileInput.target.files);
+
+    // ImageCompressService.filesArrayToCompressedImageSourceEx(files, option).then(observableImages => {
+    //   observableImages.subscribe((image) => {
+    //     images.push(image);
+    //   }, (error) => {
+    //     console.log("Error while converting");
+    //   }, () => {
+    //             this.processedImages = images;
+    //             this.showTitle = true;
+    //   });
+    // });
+
+
+  }
+
 
 }
