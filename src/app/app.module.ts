@@ -19,12 +19,20 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatTabsModule } from "@angular/material/tabs";
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { ImageCompressService,ResizeOptions,ImageUtilityService } from 'ng2-image-compress';
+import { FileListComponent } from './pages/file-list/file-list.component';
+import { FileDragAndDropComponent } from './pages/file-drag-and-drop/file-drag-and-drop.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FileListComponent,
+    FileDragAndDropComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +48,8 @@ import { ImageCompressService,ResizeOptions,ImageUtilityService } from 'ng2-imag
     MatSlideToggleModule,
     MatIconModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    DragDropModule
   ],
   providers: [ImageCompressService,ResizeOptions],
   bootstrap: [AppComponent]

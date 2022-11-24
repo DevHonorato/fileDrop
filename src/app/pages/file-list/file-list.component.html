@@ -1,0 +1,116 @@
+<div class="mt-5 mb-4 d-flex">
+  <h3 class="m-0">{{title}}</h3>
+</div>
+
+<div class="mb-3">
+  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          <!-- Solte o seu arquivo aqui ou click no botão -->
+          Drop your file here or click the button
+          <button type="button" class="btn btn-sm btn-primary" (click)="openFileSelector()">Send files</button>
+      </ng-template>
+  </ngx-file-drop>
+
+
+  <!-- <div style="display: none;" class="upload-galeria" *ngIf="processedImages.length != 0">
+
+    <div class="card cartao-personalizado" *ngFor="let item of processedImages; let i=index">
+
+        <div *ngIf="item.type.includes('image')"> -->
+            <!-- <img [src]="item[1].url" class="card-img-top" alt="..."> -->
+            <!-- <div class="cartao-imagem" style="background-image: url('{{item.compressedImage.imageDataUrl}}')">
+
+            </div>
+        </div>
+        <div *ngIf="!item.type.includes('image')">
+            <div class="cartao-imagem" style="background-image: url('../assets/img/file.jpg');">
+
+            </div>
+        </div>
+        <div class="card-body p-0 m-0 cartao-corpo">
+            <small class="card-title cartao-titulo">{{redutorDeNome(item.compressedImage.fileName, 19)}}</small> -->
+            <!-- <p class="card-text">{{ item[0].type }}</p>
+              <a [href]="item[1].url" target="_blank" class="btn btn-primary">Abrir</a> -->
+        <!-- </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="table-responsive" *ngIf="processedImages.length != 0" style="margin-top: 60px; display:none">
+    <table class="table table-bordered table-stripped">
+        <thead>
+            <tr>
+                <th>
+                    Preview
+                </th>
+                <th id="teste">
+                    Ordem
+                </th>
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+
+            <tr *ngFor="let item of processedImages, let i = index" cdkDrag >
+              <td colspan="3" class="example-custom-placeholder" *cdkDragPlaceholder></td>
+
+                <td>
+                    <img [src]="item.compressedImage.imageDataUrl" *ngIf="item.compressedImage.imageDataUrl!=null" style="max-height: 180px;">
+                </td> -->
+                <!-- <td> -->
+                <!-- <img [src]="croppedImage" style="max-width: 180px;" /> -->
+
+                <!-- <input type="file" accept="image/jpeg, image/png, " multiple class="form-control btn btn-outline btn-default" placeholder="Buscar..." (change)="selectFile($event)" id="fileImg"> -->
+                <!-- </td> -->
+                <!-- <td>
+                    <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)">
+                </td>
+                <td> -->
+                    <!-- <button class="btn btn-white" style="margin: 3px;" (click)="deleteItem(item,i)"><i class="fa fa-trash"></i>Deletar </button>
+                    <button type="submit" class="btn btn-primary " style="margin: 3px;" (click)="getIMG(item)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button> -->
+                <!-- </td>
+            </tr>
+
+            <tr style="display: none">
+                <td> -->
+                    <!-- <img src="{{imagem.img_lnk}}" *ngIf="imagem.img_lnk!=null" style="max-width: 180px;" style="max-width: 180px;"> -->
+                <!-- </td>
+                <td> -->
+                    <!-- <input type="text" id="chave" value="{{imagem.img_chv}}" style="display: none;">
+                    <input type="text" id="id_img" value="{{imagem.img_id}}" style="display: none;">
+                    <input type="number" class="form-control" min="1" value="{{imagem.img_ord}}" disabled> -->
+                <!-- </td>
+                <td> -->
+                    <!-- <button class="btn btn-white" (click)="buscarImagem(imagem.img_id)" id="btnExcluir"><i class="fa fa-trash"></i> </button> -->
+                <!-- </td>
+            </tr>
+        </tbody>
+    </table>
+  </div> -->
+
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="processedImages.length != 0" style="margin-top: 60px; ">
+    <div class="example-box row" *ngFor="let item of processedImages, let i = index" cdkDrag>
+      <div class="example-custom-placeholder col-12" *cdkDragPlaceholder></div>
+      <div class="col-lg-7 col-md-12" style=" display: flex; flex-direction: row; align-items: center; ">
+        <div class="row" style="width: 100%;">
+          <div class="col-lg-5 col-md-5" style="text-align: center;">
+            <img [src]="item.url" *ngIf="item.url!=null" style="max-height: 145px;">
+          </div>
+          <div class="col-lg-7 col-md-7" style="padding-left: 25px;min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;">
+            <small class="p-0 m-1"><strong>{{redutorDeNome(item.name, 190)}}</strong> </small>
+            <small class="p-0 m-1">Size Original: <strong>{{item.sizeFile}}</strong> </small>
+            <small class="p-0 m-1">Size Compress: <strong>{{item.sizeCompress}}</strong> </small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-5" style=" display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap; ">
+          <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)" disabled style=" width: 50%; margin: 15px; ">
+      </div>
+      <div class="col-lg-3 col-md-7" style=" display: flex; flex-direction: row; align-items: center; justify-content: center; flex-wrap: wrap; ">
+          <button type="submit" class="btn btn-primary " style="margin: 3px;" (click)="compress(item,i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Compress</button>
+          <button class="btn btn-danger" style="margin: 3px;" (click)="deleteItem(item,i)"><i class="fa fa-trash"></i>Delete </button>
+      </div>
+    </div>
+  </div>
+</div>
