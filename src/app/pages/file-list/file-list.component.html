@@ -91,11 +91,19 @@
 
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="processedImages.length != 0" style="margin-top: 60px; ">
     <div class="example-box row" *ngFor="let item of processedImages, let i = index" cdkDrag>
+      <div style="position: relative;">
+        <div cdkDragHandle style="position: absolute;top: -5px;right: 25px; cursor: move;">
+          <span class="material-symbols-outlined">
+            drag_handle
+            </span>
+        </div>
+      </div>
       <div class="example-custom-placeholder col-12" *cdkDragPlaceholder></div>
       <div class="col-lg-7 col-md-12" style=" display: flex; flex-direction: row; align-items: center; ">
         <div class="row" style="width: 100%;">
           <div class="col-lg-5 col-md-5" style="text-align: center;">
-            <img [src]="item.url" *ngIf="item.url!=null" style="max-height: 145px;">
+            <img [src]="item.url" *ngIf="item.url!=null && item.compress.length == 0" style="max-height: 145px;">
+            <img [src]="item.compress[0].compressedImage.imageDataUrl" *ngIf="item.compress.length > 0" style="max-height: 145px; border: 1px solid green">
           </div>
           <div class="col-lg-7 col-md-7" style="padding-left: 25px;min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;">
             <small class="p-0 m-1"><strong>{{redutorDeNome(item.name, 190)}}</strong> </small>

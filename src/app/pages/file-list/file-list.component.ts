@@ -170,6 +170,11 @@ export class FileListComponent implements OnInit {
       option.Resize_Max_Width = 1920;
       option.Resize_Quality = 50;
       option.Resize_Type = 'png';
+    }else if(fileInput[0].type == "image/gif"){
+      option.Resize_Max_Height = 1080;
+      option.Resize_Max_Width = 1920;
+      option.Resize_Quality = 50;
+      option.Resize_Type = 'gif';
     }else{
       // let option: ResizeOptions  = { Resize_Max_Height  : 1080 , Resize_Max_Width : 1920, Resize_Quality : 70 }
       option.Resize_Max_Height = 1080;
@@ -197,7 +202,7 @@ export class FileListComponent implements OnInit {
         this.processedImages[i].sizeCompress = this.sizeFile(bf.length);
 
         // // console.log("this.processedImages ",this.processedImages[0].imageDataUrl.match(/:(.+\/.+);/)[1]);
-        // console.log("this.processedImages ",this.processedImages);
+        console.log("this.processedImages ",this.processedImages);
 
         // const src = image.imageDataUrl;
         // const base64str = src.split('base64,')[1];
