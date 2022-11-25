@@ -3,7 +3,7 @@
 </div>
 
 <div class="mb-3">
-  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" accept="image/*">
       <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
           <!-- Solte o seu arquivo aqui ou click no botão -->
           Drop your file here or click the button
