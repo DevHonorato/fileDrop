@@ -14,7 +14,8 @@ class FileEdit {
   file?:         File;
   sizeFile?:     string;
   compress?:     [];
-  sizeCompress?: string
+  sizeCompress?: string;
+  stadoCompress: any = null
 }
 
 
@@ -34,6 +35,8 @@ export class FileListComponent implements OnInit {
   public files: NgxFileDropEntry[] = [];
   public file: any[] = [];
   public fileCompress: any[] = [];
+
+  saving: boolean = false;
 
   movies = [
     'Episode I - The Phantom Menace',
@@ -189,6 +192,8 @@ export class FileListComponent implements OnInit {
   }
 
   onChange(fileInput: any, i: any) {
+
+    this.processedImages[i].stadoCompress = true;
     let fileList: FileList;
 
     let images: Array<IImage> = [];
@@ -232,13 +237,11 @@ export class FileListComponent implements OnInit {
 
         this.processedImages[i].sizeCompress = this.sizeFile(bf.length);
 
-        const contentType = 'image/png';
-        const b64Data = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
-
         this.processedImages[i].compress[0].compressedImage.imageObjectUrl = this.generatorUrlBase64(this.processedImages[i].compress[0].compressedImage.imageDataUrl.substring(this.processedImages[i].compress[0].compressedImage.imageDataUrl.indexOf(',') + 1), this.processedImages[i].compress[0].compressedImage.type)
 
         // // console.log("this.processedImages ",this.processedImages[0].imageDataUrl.match(/:(.+\/.+);/)[1]);
-        // console.log("this.processedImages ",this.processedImages);
+        console.log("this.processedImages ",this.processedImages);
+        this.processedImages[i].stadoCompress = false;
 
         // const src = image.imageDataUrl;
         // const base64str = src.split('base64,')[1];
@@ -325,4 +328,16 @@ export class FileListComponent implements OnInit {
     window.open(url, "_blank");
   }
 
+  openFileSelector(){
+    const botao = document.getElementById("openFileSelector");
+    botao?.click();
+  }
+
+  save(): void {
+    this.saving = true;
+    // Juggle 5 hens while wiggling your toes and other magic...
+  }
+
 }
+
+

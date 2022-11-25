@@ -30,6 +30,7 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "./node_modules/ngx-loading-buttons/src/styles.css",
                             "src/custom-theme.scss",
                             "src/styles.css"
                         ],
@@ -95,6 +96,7 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "./node_modules/ngx-loading-buttons/src/styles.css",
                             "src/styles.css"
                         ],
                         "scripts": []
