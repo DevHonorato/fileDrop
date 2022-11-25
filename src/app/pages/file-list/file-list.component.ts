@@ -36,8 +36,6 @@ export class FileListComponent implements OnInit {
   public file: any[] = [];
   public fileCompress: any[] = [];
 
-  saving: boolean = false;
-
   movies = [
     'Episode I - The Phantom Menace',
     'Episode II - Attack of the Clones',
@@ -331,11 +329,6 @@ export class FileListComponent implements OnInit {
   openFileSelector(){
     const botao = document.getElementById("openFileSelector");
     botao?.click();
-  }
-
-  save(): void {
-    this.saving = true;
-    // Juggle 5 hens while wiggling your toes and other magic...
   }
 
 }
