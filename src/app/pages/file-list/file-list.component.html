@@ -106,9 +106,21 @@
             <img [src]="item.compress[0].compressedImage.imageDataUrl" *ngIf="item.compress.length > 0" style="max-height: 145px; border: 1px solid green">
           </div>
           <div class="col-lg-7 col-md-7" style="padding-left: 25px;min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;">
-            <small class="p-0 m-1"><strong>{{redutorDeNome(item.name, 190)}}</strong> </small>
-            <small class="p-0 m-1">Size Original: <strong>{{item.sizeFile}}</strong> </small>
-            <small class="p-0 m-1">Size Compress: <strong>{{item.sizeCompress}}</strong> </small>
+            <small class="p-0 m-1" style=" display: flex; align-content: center; align-items: center; justify-content: space-between; ">
+              <strong>{{redutorDeNome(item.name, 60)}}</strong>
+            </small>
+            <small class="p-0 m-1" style=" display: flex; align-content: center; align-items: center; justify-content: space-between; ">Size Original:
+              <strong>{{item.sizeFile}}</strong>
+              <a *ngIf="item.url != null" (click)="goToLink(item.url['changingThisBreaksApplicationSecurity'])" style="cursor: pointer;">
+                <span class="material-symbols-outlined">open_in_browser</span>
+              </a>
+            </small>
+            <small class="p-0 m-1" style=" display: flex; align-content: center; align-items: center; justify-content: space-between; ">Size Compress:
+              <strong>{{item.sizeCompress}}</strong>
+              <a *ngIf="item.compress.length > 0" (click)="goToLink(item.compress[0].compressedImage.imageObjectUrl)" style="cursor: pointer;">
+                <span class="material-symbols-outlined">open_in_browser</span>
+              </a>
+            </small>
           </div>
         </div>
       </div>

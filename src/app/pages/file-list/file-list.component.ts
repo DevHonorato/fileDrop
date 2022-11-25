@@ -157,6 +157,32 @@ export class FileListComponent implements OnInit {
 
   }
 
+  generatorUrlBase64(b64Data: any, contentType = '', sliceSize = 512){
+    // const b64toBlob = () => {
+      const byteCharacters = atob(b64Data);
+      const byteArrays = [];
+
+      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+
+      const blob = new Blob(byteArrays, {type: contentType});
+
+    // }
+
+    const blobUrl = URL.createObjectURL(blob);
+
+    return blobUrl;
+  }
+
   onChange(fileInput: any, i: any) {
     let fileList: FileList;
 
@@ -200,6 +226,11 @@ export class FileListComponent implements OnInit {
         const bf = Buffer.from(img.substring(img.indexOf(',') + 1));
 
         this.processedImages[i].sizeCompress = this.sizeFile(bf.length);
+
+        const contentType = 'image/png';
+        const b64Data = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
+
+        this.processedImages[i].compress[0].compressedImage.imageObjectUrl = this.generatorUrlBase64(this.processedImages[i].compress[0].compressedImage.imageDataUrl.substring(this.processedImages[i].compress[0].compressedImage.imageDataUrl.indexOf(',') + 1), this.processedImages[i].compress[0].compressedImage.type)
 
         // // console.log("this.processedImages ",this.processedImages[0].imageDataUrl.match(/:(.+\/.+);/)[1]);
         console.log("this.processedImages ",this.processedImages);
@@ -283,6 +314,10 @@ export class FileListComponent implements OnInit {
     const i = Math.floor(Math.log(bytes) / Math.log(k))
     // console.log(`${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`);
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+  }
+
+  goToLink(url: string){
+    window.open(url, "_blank");
   }
 
 }
