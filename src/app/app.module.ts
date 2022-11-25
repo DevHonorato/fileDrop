@@ -25,6 +25,7 @@ import { ImageCompressService,ResizeOptions,ImageUtilityService } from 'ng2-imag
 import { FileListComponent } from './pages/file-list/file-list.component';
 import { FileDragAndDropComponent } from './pages/file-drag-and-drop/file-drag-and-drop.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     AppComponent,
     FileListComponent,
     FileDragAndDropComponent,
-    NavBarComponent
+    NavBarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
