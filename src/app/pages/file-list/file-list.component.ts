@@ -64,61 +64,66 @@ export class FileListComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
+          console.log("file",file)
+          if(file.type.includes("image/")){
 
-          try {
+            try {
 
-            const url = this.generatorUrl(file);
-            let array = [file];
-            // console.log(array)
 
-            let novoArray = new FileEdit();
+              const url = this.generatorUrl(file);
+              let array = [file];
+              // console.log(array)
 
-            for (let index = 0; index < array.length; index++) {
-              const element = array[index];
+              let novoArray = new FileEdit();
 
-              novoArray.name = element.name;
-              novoArray.type = element.type;
-              novoArray.file = element;
-              novoArray.compress = [];
+              for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+
+                novoArray.name = element.name;
+                novoArray.type = element.type;
+                novoArray.file = element;
+                novoArray.compress = [];
+              }
+
+              novoArray.url = url;
+
+              // console.log(novoArray)
+              this.file.push(novoArray)
+              // this.onChange([file])
+              this.fileCompress.push(file);
+
+              novoArray.sizeFile = this.sizeFile(novoArray.file?.size);
+              novoArray.sizeCompress = " - ";
+
+              this.processedImages.push(novoArray);
+              // console.log("this.fileCompress",this.fileCompress)
+              // console.log("this.processedImages",this.processedImages)
+
+
+              // Here you can access the real file
+              // console.log(droppedFile.relativePath, file);
+
+              /**
+              // You could upload it like this:
+              const formData = new FormData()
+              formData.append('logo', file, relativePath)
+
+              // Headers
+              const headers = new HttpHeaders({
+                'security-token': 'mytoken'
+              })
+
+              this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
+              .subscribe(data => {
+                // Sanitized logo returned from backend
+              })
+              **/
+            } catch (error: any) {
+              errors.push(error)
+              // this.notificacaoService.showSnackBar([error], 'OK', 'background-padrao-snackbar', 'left', 'top', 100);
+              // console.log(error)
             }
 
-            novoArray.url = url;
-
-            // console.log(novoArray)
-            this.file.push(novoArray)
-            // this.onChange([file])
-            this.fileCompress.push(file);
-
-            novoArray.sizeFile = this.sizeFile(novoArray.file?.size);
-            novoArray.sizeCompress = " - ";
-
-            this.processedImages.push(novoArray);
-            // console.log("this.fileCompress",this.fileCompress)
-            // console.log("this.processedImages",this.processedImages)
-
-
-            // Here you can access the real file
-            // console.log(droppedFile.relativePath, file);
-
-            /**
-            // You could upload it like this:
-            const formData = new FormData()
-            formData.append('logo', file, relativePath)
-
-            // Headers
-            const headers = new HttpHeaders({
-              'security-token': 'mytoken'
-            })
-
-            this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-            .subscribe(data => {
-              // Sanitized logo returned from backend
-            })
-            **/
-          } catch (error: any) {
-            errors.push(error)
-            // this.notificacaoService.showSnackBar([error], 'OK', 'background-padrao-snackbar', 'left', 'top', 100);
-            // console.log(error)
           }
         });
       } else {
