@@ -1,8 +1,8 @@
-<div class="mt-5 mb-4 d-flex">
+<!-- <div class="mt-5 mb-4 d-flex">
   <h3 class="m-0">{{title}}</h3>
-</div>
+</div> -->
 
-<div style=" padding-bottom: 120px; ">
+<div style=" padding-bottom: 120px;padding-top: 60px; ">
 
   <a (click)="openFileSelector()" class="a-file-drop">
     <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" accept="image/*">
@@ -73,7 +73,7 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-5 col-4" style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around; ">
-          <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)" disabled style="width: 90%;height: 31px;">
+          <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)" disabled style="width: 90%;height: 31px;text-align: center;">
       </div>
       <div class="col-lg-3 col-md-7 col-8" style="display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around;flex-wrap: nowrap;">
           <button type="submit" class="btn btn-primary btn-sm " style="margin: 3px;width: 100%;" (click)="compress(item,i)" [ngClass]="(item.stadoCompress != null && item.stadoCompress == true) ? 'bgLoadingTrue' : 'bgLoadingDefault'" [disabled]="item.stadoCompress != null && item.stadoCompress == true">
