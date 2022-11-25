@@ -2,97 +2,22 @@
   <h3 class="m-0">{{title}}</h3>
 </div>
 
-<div class="mb-3">
-  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" accept="image/*">
-      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-          <!-- Solte o seu arquivo aqui ou click no botão -->
-          Drop your file here or click the button
-          <button type="button" class="btn btn-sm btn-primary" (click)="openFileSelector()">Send files</button>
-      </ng-template>
-  </ngx-file-drop>
+<div style=" padding-bottom: 120px; ">
 
-
-  <!-- <div style="display: none;" class="upload-galeria" *ngIf="processedImages.length != 0">
-
-    <div class="card cartao-personalizado" *ngFor="let item of processedImages; let i=index">
-
-        <div *ngIf="item.type.includes('image')"> -->
-            <!-- <img [src]="item[1].url" class="card-img-top" alt="..."> -->
-            <!-- <div class="cartao-imagem" style="background-image: url('{{item.compressedImage.imageDataUrl}}')">
-
-            </div>
-        </div>
-        <div *ngIf="!item.type.includes('image')">
-            <div class="cartao-imagem" style="background-image: url('../assets/img/file.jpg');">
-
-            </div>
-        </div>
-        <div class="card-body p-0 m-0 cartao-corpo">
-            <small class="card-title cartao-titulo">{{redutorDeNome(item.compressedImage.fileName, 19)}}</small> -->
-            <!-- <p class="card-text">{{ item[0].type }}</p>
-              <a [href]="item[1].url" target="_blank" class="btn btn-primary">Abrir</a> -->
-        <!-- </div>
-    </div>
-  </div> -->
-
-  <!-- <div class="table-responsive" *ngIf="processedImages.length != 0" style="margin-top: 60px; display:none">
-    <table class="table table-bordered table-stripped">
-        <thead>
-            <tr>
-                <th>
-                    Preview
-                </th>
-                <th id="teste">
-                    Ordem
-                </th>
-                <th>
-                    Ações
-                </th>
-            </tr>
-        </thead>
-        <tbody cdkDropList (cdkDropListDropped)="drop($event)">
-
-            <tr *ngFor="let item of processedImages, let i = index" cdkDrag >
-              <td colspan="3" class="example-custom-placeholder" *cdkDragPlaceholder></td>
-
-                <td>
-                    <img [src]="item.compressedImage.imageDataUrl" *ngIf="item.compressedImage.imageDataUrl!=null" style="max-height: 180px;">
-                </td> -->
-                <!-- <td> -->
-                <!-- <img [src]="croppedImage" style="max-width: 180px;" /> -->
-
-                <!-- <input type="file" accept="image/jpeg, image/png, " multiple class="form-control btn btn-outline btn-default" placeholder="Buscar..." (change)="selectFile($event)" id="fileImg"> -->
-                <!-- </td> -->
-                <!-- <td>
-                    <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)">
-                </td>
-                <td> -->
-                    <!-- <button class="btn btn-white" style="margin: 3px;" (click)="deleteItem(item,i)"><i class="fa fa-trash"></i>Deletar </button>
-                    <button type="submit" class="btn btn-primary " style="margin: 3px;" (click)="getIMG(item)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button> -->
-                <!-- </td>
-            </tr>
-
-            <tr style="display: none">
-                <td> -->
-                    <!-- <img src="{{imagem.img_lnk}}" *ngIf="imagem.img_lnk!=null" style="max-width: 180px;" style="max-width: 180px;"> -->
-                <!-- </td>
-                <td> -->
-                    <!-- <input type="text" id="chave" value="{{imagem.img_chv}}" style="display: none;">
-                    <input type="text" id="id_img" value="{{imagem.img_id}}" style="display: none;">
-                    <input type="number" class="form-control" min="1" value="{{imagem.img_ord}}" disabled> -->
-                <!-- </td>
-                <td> -->
-                    <!-- <button class="btn btn-white" (click)="buscarImagem(imagem.img_id)" id="btnExcluir"><i class="fa fa-trash"></i> </button> -->
-                <!-- </td>
-            </tr>
-        </tbody>
-    </table>
-  </div> -->
+  <a (click)="openFileSelector()" class="a-file-drop">
+    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" accept="image/*">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+            <!-- Solte o seu arquivo aqui ou click no botão -->
+            Drop your file here or click here
+            <button id="openFileSelector" type="button" class="btn btn-sm btn-primary d-none" (click)="openFileSelector()">Send files</button>
+        </ng-template>
+    </ngx-file-drop>
+  </a>
 
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="processedImages.length != 0" style="margin-top: 60px; ">
     <div class="example-box row" *ngFor="let item of processedImages, let i = index" cdkDrag>
       <div style="position: relative;">
-        <div cdkDragHandle style="position: absolute;top: -15px;right: 4px; cursor: move;">
+        <div cdkDragHandle style="position: absolute;top: -15px;right: -10px; cursor: move;width: 45px; text-align: center; display: flex; align-items: center; justify-content: center;">
           <span class="material-symbols-outlined">
             drag_handle
             </span>
@@ -102,34 +27,71 @@
       <div class="col-lg-7 col-md-12" style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0; ">
         <div class="row" style="width: 100%; padding: 0; margin: 0;">
           <div class="col-lg-5 col-md-5" style="text-align: center;">
-            <img [src]="item.url" *ngIf="item.url!=null && item.compress.length == 0" style="max-height: 145px;">
-            <img [src]="item.compress[0].compressedImage.imageDataUrl" *ngIf="item.compress.length > 0" style="max-height: 145px; border: 1px solid green">
+            <img [src]="item.url" *ngIf="item.url!=null && item.compress.length == 0" style="max-height: 140px;">
+            <img [src]="item.compress[0].compressedImage.imageDataUrl" *ngIf="item.compress.length > 0" style="max-height: 140px;border: 1px solid green;">
           </div>
-          <div class="col-lg-7 col-md-7" style="min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;padding: 0;margin: 0;">
-            <small class="p-0 m-1" style=" display: flex; align-content: center; align-items: center; justify-content: space-between; ">
-              <strong>{{redutorDeNome(item.name, 60)}}</strong>
-            </small>
-            <small class="p-0 m-1" style=" display: flex; align-content: center; align-items: center; justify-content: space-between; ">Size Original:
-              <strong>{{item.sizeFile}}</strong>
-              <a *ngIf="item.url != null" (click)="goToLink(item.url['changingThisBreaksApplicationSecurity'])" style="cursor: pointer;">
-                <span class="material-symbols-outlined">open_in_browser</span>
-              </a>
-            </small>
-            <small class="p-0 m-1" style=" display: flex; align-content: center; align-items: center; justify-content: space-between; ">Size Compress:
-              <strong *ngIf="item.sizeCompress != ' - '">{{item.sizeCompress}}</strong>
-              <a *ngIf="item.compress.length > 0" (click)="goToLink(item.compress[0].compressedImage.imageObjectUrl)" style="cursor: pointer;">
-                <span class="material-symbols-outlined">open_in_browser</span>
-              </a>
-            </small>
+          <div class="col-lg-7 col-md-7" style="min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: space-around;padding: 0;margin: 0;">
+
+            <div class="p-0 m-1" style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
+                <strong>{{redutorDeNome(item.name, 60)}}</strong>
+            </div>
+
+            <div class="p-0 m-1" style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
+              <div style="width: 100%;">
+                Size Original:
+              </div>
+
+              <div style="width: 100%; text-align: center;">
+                <strong>{{item.sizeFile}}</strong>
+              </div>
+
+              <div style="width: 100%; text-align: end;">
+                <a *ngIf="item.url != null" (click)="goToLink(item.url['changingThisBreaksApplicationSecurity'])" style="cursor: pointer;">
+                  <span class="material-symbols-outlined">open_in_browser</span>
+                </a>
+              </div>
+            </div>
+
+
+            <div class="p-0 m-1" style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
+              <div style=" width: 100%; ">
+                Size Compress:
+              </div>
+
+              <div style="width: 100%; text-align: center;">
+                <strong *ngIf="item.sizeCompress != ' - '">{{item.sizeCompress}}</strong>
+              </div>
+
+              <div style="width: 100%; text-align: end;">
+                <a *ngIf="item.compress.length > 0" (click)="goToLink(item.compress[0].compressedImage.imageObjectUrl)" style="cursor: pointer;">
+                  <span class="material-symbols-outlined">open_in_browser</span>
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
       <div class="col-lg-2 col-md-5 col-4" style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around; ">
-          <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)" disabled style=" width: 65%; ">
+          <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)" disabled style="width: 90%;height: 31px;">
       </div>
-      <div class="col-lg-3 col-md-7 col-8" style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around;flex-wrap: wrap; ">
-          <button type="submit" class="btn btn-primary " style="margin: 3px;" (click)="compress(item,i)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Compress</button>
-          <button class="btn btn-danger" style="margin: 3px;" (click)="deleteItem(item,i)"><i class="fa fa-trash"></i>Delete </button>
+      <div class="col-lg-3 col-md-7 col-8" style="display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around;flex-wrap: nowrap;">
+          <button type="submit" class="btn btn-primary btn-sm " style="margin: 3px;width: 100%;" (click)="compress(item,i)" [ngClass]="(item.stadoCompress != null && item.stadoCompress == true) ? 'bgLoadingTrue' : 'bgLoadingDefault'" [disabled]="item.stadoCompress != null && item.stadoCompress == true">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            <div style="position: relative">
+              <div [class.spinner]="item.stadoCompress != null && item.stadoCompress == true" ></div>
+            </div>
+
+            Compress
+
+
+          </button>
+          <button class="btn btn-outline-danger btn-sm " style="margin: 3px;width: 100%;" (click)="deleteItem(item,i)">
+            <i class="fa fa-trash"></i>
+            Delete
+          </button>
+
+          <!-- <button mat-raised-button color="primary" [class.spinner]="saving" [disabled]="saving" (click)="save()">Save</button> -->
       </div>
     </div>
   </div>
