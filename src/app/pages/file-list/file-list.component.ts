@@ -233,7 +233,7 @@ export class FileListComponent implements OnInit {
         this.processedImages[i].compress[0].compressedImage.imageObjectUrl = this.generatorUrlBase64(this.processedImages[i].compress[0].compressedImage.imageDataUrl.substring(this.processedImages[i].compress[0].compressedImage.imageDataUrl.indexOf(',') + 1), this.processedImages[i].compress[0].compressedImage.type)
 
         // // console.log("this.processedImages ",this.processedImages[0].imageDataUrl.match(/:(.+\/.+);/)[1]);
-        console.log("this.processedImages ",this.processedImages);
+        // console.log("this.processedImages ",this.processedImages);
 
         // const src = image.imageDataUrl;
         // const base64str = src.split('base64,')[1];
