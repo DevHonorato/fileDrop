@@ -39,8 +39,11 @@ export class NotificacaoService {
       this.openSnackBar(mensagem[i], btn, style, horizontalPosition, verticalPosition, duration)
       if (i == mensagem[i].length) {
         sub.unsubscribe()
+        console.log("AAA")
       }
     })
+
+    console.log("AAA")
   }
 
   // showSuccess(message: string | undefined, title: string | undefined){

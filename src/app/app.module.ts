@@ -18,6 +18,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatTabsModule } from "@angular/material/tabs";
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -51,7 +52,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatIconModule,
     MatListModule,
     MatTabsModule,
-    DragDropModule
+    DragDropModule,
+    CdkAccordionModule
   ],
   providers: [ImageCompressService,ResizeOptions],
   bootstrap: [AppComponent]
