@@ -107,6 +107,20 @@
   background: #e9efff;
 }
 
+.example-accordion-item{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.example-accordion-item-description {
+  color: #999;
+  font-weight: normal;
+}
+
 
 
 @keyframes spinner {

@@ -30,3 +30,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .btn-primary {
   background: #007bff;
 }
+
+.background-padrao-snackbar {
+  /* background: linear-gradient(0deg, rgb(41 41 41) 50%, rgb(54 54 54) 50%); */
+  color: #fff;
+  height: 60px;
+  display: grid !important;
+  align-items: center;
+}
+
+.background-danger-snackbar {
+  /* background: radial-gradient(#ff0000, #660000); */
+  background: #dc3545;
+  color: #fff;
+  height: 60px;
+  display: grid !important;
+  align-items: center;
+}
+
+.background-warning-snackbar {
+  background: #ff991a;
+  color: #fff;
+  height: 60px;
+  display: grid !important;
+  align-items: center;
+}
+
+.mat-simple-snackbar-action {
+  color: #ffffff;
+}

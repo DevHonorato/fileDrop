@@ -5,38 +5,47 @@
 <div style=" padding-bottom: 120px;padding-top: 60px; ">
 
   <a (click)="openFileSelector()" class="a-file-drop">
-    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" accept="image/*">
-        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-            <!-- Solte o seu arquivo aqui ou click no botão -->
-            Drop your file here or click here
-            <button id="openFileSelector" type="button" class="btn btn-sm btn-primary d-none" (click)="openFileSelector()">Send files</button>
-        </ng-template>
+    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)"
+      (onFileLeave)="fileLeave($event)" accept="image/*">
+      <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+        <!-- Solte o seu arquivo aqui ou click no botão -->
+        Drop your file here or click here
+        <button id="openFileSelector" type="button" class="btn btn-sm btn-primary d-none"
+          (click)="openFileSelector()">Send files</button>
+      </ng-template>
     </ngx-file-drop>
   </a>
 
-  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="processedImages.length != 0" style="margin-top: 60px; ">
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="processedImages.length != 0"
+    style="margin-top: 60px; ">
     <div class="example-box row" *ngFor="let item of processedImages, let i = index" cdkDrag>
       <div style="position: relative;">
-        <div cdkDragHandle style="position: absolute;top: -15px;right: -10px; cursor: move;width: 45px; text-align: center; display: flex; align-items: center; justify-content: center;">
+        <div cdkDragHandle
+          style="position: absolute;top: -15px;right: -10px; cursor: move;width: 45px; text-align: center; display: flex; align-items: center; justify-content: center;">
           <span class="material-symbols-outlined">
             drag_handle
-            </span>
+          </span>
         </div>
       </div>
       <div class="example-custom-placeholder col-12" *cdkDragPlaceholder></div>
-      <div class="col-lg-7 col-md-12" style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0; ">
+      <div class="col-lg-7 col-md-12"
+        style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0; ">
         <div class="row" style="width: 100%; padding: 0; margin: 0;">
-          <div class="col-lg-5 col-md-5" style="text-align: center;">
+          <div class="col-lg-5 col-md-5" style="text-align: center;display: flex;justify-content: center;align-items: center;">
             <img [src]="item.url" *ngIf="item.url!=null && item.compress.length == 0" style="max-height: 140px;">
-            <img [src]="item.compress[0].compressedImage.imageDataUrl" *ngIf="item.compress.length > 0" style="max-height: 140px;border: 1px solid green;">
+            <img [src]="item.compress[0].compressedImage.imageDataUrl" *ngIf="item.compress.length > 0"
+              style="max-height: 140px;border: 1px solid green;">
           </div>
-          <div class="col-lg-7 col-md-7" style="min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: space-around;padding: 0;margin: 0;">
+          <div class="col-lg-7 col-md-7"
+            style="min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;padding: 0;margin: 0;">
 
-            <div class="p-0 m-1" style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
-                <strong>{{redutorDeNome(item.name, 60)}}</strong>
+            <div class="p-0 m-1"
+              style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
+              <strong>{{redutorDeNome(item.name, 60)}}</strong>
             </div>
 
-            <div class="p-0 m-1" style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
+            <div class="p-0 m-1"
+              style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
               <div style="width: 100%;">
                 Size Original:
               </div>
@@ -46,14 +55,16 @@
               </div>
 
               <div style="width: 100%; text-align: end;">
-                <a *ngIf="item.url != null" (click)="goToLink(item.url['changingThisBreaksApplicationSecurity'])" style="cursor: pointer;">
-                  <span class="material-symbols-outlined">open_in_browser</span>
+                <a *ngIf="item.url != null" (click)="goToLink(item.url['changingThisBreaksApplicationSecurity'])"
+                  style="cursor: pointer;" title="Open in new tab">
+                  <span class="material-symbols-outlined" title="Open in new tab">open_in_new</span>
                 </a>
               </div>
             </div>
 
 
-            <div class="p-0 m-1" style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
+            <div class="p-0 m-1"
+              style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
               <div style=" width: 100%; ">
                 Size Compress:
               </div>
@@ -63,35 +74,115 @@
               </div>
 
               <div style="width: 100%; text-align: end;">
-                <a *ngIf="item.compress.length > 0" (click)="goToLink(item.compress[0].compressedImage.imageObjectUrl)" style="cursor: pointer;">
-                  <span class="material-symbols-outlined">open_in_browser</span>
+                <a *ngIf="item.compress.length > 0" (click)="goToLink(item.compress[0].compressedImage.imageObjectUrl)"
+                  style="cursor: pointer;" title="Open in new tab">
+                  <span class="material-symbols-outlined" title="Open in new tab">open_in_new</span>
                 </a>
               </div>
             </div>
 
+            <cdk-accordion style=" margin-bottom: 10px; " *ngIf="item.type == 'image/jpeg' || item.type == 'image/png'">
+              <span class="p-0 m-1"
+                style=" display: flex; justify-content: space-between; font-weight: bold; cursor: pointer; "
+                (click)="accordionItem.toggle()"><span style=" display: flex; align-items: center; ">
+                  <span class="material-symbols-outlined" style=" font-size: 16px; margin-right: 5px; ">
+                    settings
+                  </span>
+                  Compress configuration
+                </span>
+                <span class="material-symbols-outlined">
+                  {{ accordionItem.expanded ? 'arrow_drop_up' : 'arrow_drop_down' }}
+                </span>
+              </span>
+              <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button"
+                tabindex="0" [attr.id]="'accordion-header-'" [attr.aria-expanded]="accordionItem.expanded"
+                [attr.aria-controls]="'accordion-body-'"
+                style="display: flex;width: 100%;align-items: center;justify-content: space-around;flex-wrap: nowrap;flex-direction: row;">
+
+                <div role="region" [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-'"
+                  [attr.aria-labelledby]="'accordion-header-'" class="example-accordion-item">
+
+
+                  <div class="p-0 m-1" style="text-align: center;">
+                    <label [for]="'MaxWidth_' + (i)" class="form-label p-0 m-0">Max Width</label>
+                    <input type="number" class="form-control-plaintext" value="{{item.Resize_Max_Width}}"
+                      [id]="'MaxWidth_' + (i)" (change)="onKeyMaxWidth($event, i)"
+                      style="width: 100%;height: 20px;font-size: 13px;text-align: center;">
+                  </div>
+                  <div class="p-0 m-1" style="text-align: center;">
+                    <label [for]="'MaxHeight_' + (i)" class="form-label p-0 m-0">Max Height</label>
+                    <input type="number" class="form-control-plaintext" value="{{item.Resize_Max_Height}}"
+                      [id]="'MaxHeight_' + (i)" (change)="onKeyMaxHeight($event, i)"
+                      style="width: 100%;height: 20px;font-size: 13px;text-align: center;">
+                  </div>
+                  <div class="p-0 m-1" style="text-align: center;">
+                    <label [for]="'Quality_' + (i)" class="form-label p-0 m-0">Quality</label>
+                    <input type="number" class="form-control-plaintext" value="{{item.Resize_Quality}}"
+                      [id]="'Quality_' + (i)" (change)="onKeyQuality($event, i)"
+                      style="width: 100%;height: 20px;font-size: 13px;text-align: center;">
+                  </div>
+                </div>
+                <!-- <div class="row" style="display: flex;align-items: center;justify-content: space-around;flex-direction: row;padding: 0;margin-bottom: 5px !important;width: 100%;">
+                  <label [for]="'MaxHeight_' + (i)" class="col-sm-5 col-form-label p-0 m-0">Max Height</label>
+                  <div class="col-sm-7 p-0 m-0">
+                    <input type="number" class="form-control " value="{{item.Resize_Max_Height}}" [id]="'MaxHeight_' + (i)"  (change)="onKeyMaxHeight($event, i)" style="width: 100%;height: 20px;text-align: center;font-size: 13px;">
+                  </div>
+                </div>
+                <div class="row" style="display: flex;align-items: center;justify-content: space-around;flex-direction: row;padding: 0;margin-bottom: 5px !important;width: 100%;">
+                  <label [for]="'MaxHeight_' + (i)" class="col-sm-5 col-form-label p-0 m-0">Max Height</label>
+                  <div class="col-sm-7 p-0 m-0">
+                    <input type="number" class="form-control " value="{{item.Resize_Max_Height}}" [id]="'MaxHeight_' + (i)"  (change)="onKeyMaxHeight($event, i)" style="width: 100%;height: 20px;text-align: center;font-size: 13px;">
+                  </div>
+                </div>
+                <div class="row" style="display: flex;align-items: center;justify-content: space-around;flex-direction: row;padding: 0;margin-bottom: 5px !important;width: 100%;">
+                  <label [for]="'MaxHeight_' + (i)" class="col-sm-5 col-form-label p-0 m-0">Max Height</label>
+                  <div class="col-sm-7 p-0 m-0">
+                    <input type="number" class="form-control " value="{{item.Resize_Max_Height}}" [id]="'MaxHeight_' + (i)"  (change)="onKeyMaxHeight($event, i)" style="width: 100%;height: 20px;text-align: center;font-size: 13px;">
+                  </div>
+                </div> -->
+              </cdk-accordion-item>
+            </cdk-accordion>
+
           </div>
         </div>
       </div>
-      <div class="col-lg-2 col-md-5 col-4" style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around; ">
-          <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)" disabled style="width: 90%;height: 31px;text-align: center;">
+      <div class="col-lg-2 col-md-5 col-4"
+        style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around; ">
+        <input type="number" class="form-control" min="1" value="{{i+1}}" [id]="'ordemVeiculo' + (i+1)" disabled
+          style="width: 90%;height: 31px;text-align: center;">
       </div>
-      <div class="col-lg-3 col-md-7 col-8" style="display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around;flex-wrap: nowrap;">
-          <button type="submit" class="btn btn-primary btn-sm " style="margin: 3px;width: 100%;" (click)="compress(item,i)" [ngClass]="(item.stadoCompress != null && item.stadoCompress == true) ? 'bgLoadingTrue' : 'bgLoadingDefault'" [disabled]="item.stadoCompress != null && item.stadoCompress == true">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <div style="position: relative">
-              <div [class.spinner]="item.stadoCompress != null && item.stadoCompress == true" ></div>
+      <div class="col-lg-3 col-md-7 col-8"
+        style="display: flex;flex-direction: column;align-items: center;padding: 0;margin: 0;">
+        <div
+          style="display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0;justify-content: space-around;flex-wrap: nowrap;width: 100%;">
+          <button type="submit" class="btn btn-primary btn-sm "
+            style="margin: 3px;width: 100%;display: flex;align-items: center;justify-content: space-evenly;flex-wrap: wrap;flex-direction: row;"
+            (click)="compress(item,i)"
+            [ngClass]="(item.stadoCompress != null && item.stadoCompress == true) ? 'bgLoadingTrue' : 'bgLoadingDefault'"
+            [disabled]="item.stadoCompress != null && item.stadoCompress == true"
+            *ngIf="item.type == 'image/jpeg' || item.type == 'image/png'">
+            <!-- <i class="fa fa-pencil-square-o" aria-hidden="true"></i> -->
+
+            <div style="position: relative;width: 100%;"
+              *ngIf="item.stadoCompress != null && item.stadoCompress == true">
+              <div [class.spinner]="item.stadoCompress != null && item.stadoCompress == true"></div>
             </div>
 
             Compress
 
+            <span class="material-symbols-outlined" style="font-size: 15px;"
+              *ngIf="item.stadoCompress != null && item.stadoCompress == false">
+              check_circle
+            </span>
 
           </button>
           <button class="btn btn-outline-danger btn-sm " style="margin: 3px;width: 100%;" (click)="deleteItem(item,i)">
             <i class="fa fa-trash"></i>
             Delete
           </button>
+        </div>
 
-          <!-- <button mat-raised-button color="primary" [class.spinner]="saving" [disabled]="saving" (click)="save()">Save</button> -->
+        <!-- <button mat-raised-button color="primary" [class.spinner]="saving" [disabled]="saving" (click)="save()">Save</button> -->
       </div>
     </div>
   </div>
