@@ -102,9 +102,9 @@ export class FileListComponent implements OnInit {
               // console.log("this.fileCompress",this.fileCompress)
               // console.log("this.processedImages",this.processedImages)
 
-              const ultimo = this.processedImages.length - 1
+              const ultimo = this.processedImages.length - 1;
 
-              this.maxWidth_maxHeight(ultimo)
+              this.maxWidth_maxHeight(ultimo);
 
               // Here you can access the real file
               // console.log(droppedFile.relativePath, file);
@@ -267,6 +267,15 @@ export class FileListComponent implements OnInit {
             // console.log('this.processedImages ', this.processedImages);
             this.processedImages[i].stadoCompress = false;
 
+            this.notificacaoService.openSnackBar(
+              'Successfully compress',
+              'OK',
+              'background-success-snackbar',
+              'center',
+              'top',
+              1500
+            );
+
             // const src = image.imageDataUrl;
             // const base64str = src.split('base64,')[1];
             // const decoded = btoa(base64str);
@@ -330,7 +339,7 @@ export class FileListComponent implements OnInit {
         'background-danger-snackbar',
         'center',
         'top',
-        3000
+        1500
       );
     }
   }
@@ -372,41 +381,40 @@ export class FileListComponent implements OnInit {
     // this.processedImages[index].Resize_Max_Width = parseInt(event.target.value);
 
     let maxWidth = parseInt(this.processedImages[index].Resize_Max_Width); // Max width for the image
-    let maxHeight = parseInt(this.processedImages[index].Resize_Max_Width);    // Max height for the image
-    let ratio = 0;  // Used for aspect ratio
+    let maxHeight = parseInt(this.processedImages[index].Resize_Max_Width); // Max height for the image
+    let ratio = 0; // Used for aspect ratio
 
     let img = new Image();
 
-    img.src = this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
-    img.onload = ((event: any) => {
-      let  loadedImage = event.currentTarget;
+    img.src =
+      this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
+    img.onload = (event: any) => {
+      let loadedImage = event.currentTarget;
       let width = loadedImage.width;
       let height = loadedImage.height;
 
-        // ratio = maxWidth / width;   // get ratio for scaling image
-        // height = height * ratio;    // Reset height to match scaled image
-        // width = width * ratio;    // Reset width to match scaled image
+      // ratio = maxWidth / width;   // get ratio for scaling image
+      // height = height * ratio;    // Reset height to match scaled image
+      // width = width * ratio;    // Reset width to match scaled image
 
-        if (width > height) {
-          if (width > maxWidth) {
-            ratio = maxWidth / width;   // get ratio for scaling image
-            height = height * ratio;    // Reset height to match scaled image
-            width = width * ratio;    // Reset width to match scaled image
-          }
+      if (width > height) {
+        if (width > maxWidth) {
+          ratio = maxWidth / width; // get ratio for scaling image
+          height = height * ratio; // Reset height to match scaled image
+          width = width * ratio; // Reset width to match scaled image
         }
-        else {
-            if (height > maxHeight) {
-              ratio = maxHeight / height; // get ratio for scaling image
-              width = width * ratio;    // Reset width to match scaled image
-              height = height * ratio;    // Reset height to match scaled image
-            }
+      } else {
+        if (height > maxHeight) {
+          ratio = maxHeight / height; // get ratio for scaling image
+          width = width * ratio; // Reset width to match scaled image
+          height = height * ratio; // Reset height to match scaled image
         }
+      }
 
-        this.processedImages[index].Resize_Max_Width = parseInt(width);
+      this.processedImages[index].Resize_Max_Width = parseInt(width);
 
-        this.processedImages[index].Resize_Max_Height = parseInt(height);
-
-      })
+      this.processedImages[index].Resize_Max_Height = parseInt(height);
+    };
   }
 
   onKeyMaxWidth(event: any, index: any) {
@@ -414,48 +422,48 @@ export class FileListComponent implements OnInit {
     // console.log("index ", index)
     // console.log(this.processedImages[index])
 
-    const Max_Width = document.getElementById('MaxWidth_'+index);
-    const Max_Height = document.getElementById('MaxHeight_'+index);
+    const Max_Width = document.getElementById('MaxWidth_' + index);
+    const Max_Height = document.getElementById('MaxHeight_' + index);
 
     // this.processedImages[index].Resize_Max_Width = parseInt(event.target.value);
 
     let maxWidth = parseInt(event.target.value); // Max width for the image
-    let maxHeight = parseInt(event.target.value);    // Max height for the image
-    let ratio = 0;  // Used for aspect ratio
+    let maxHeight = parseInt(event.target.value); // Max height for the image
+    let ratio = 0; // Used for aspect ratio
 
     let img = new Image();
 
-    img.src = this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
-    img.onload = ((event: any) => {
-      let  loadedImage = event.currentTarget;
+    img.src =
+      this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
+    img.onload = (event: any) => {
+      let loadedImage = event.currentTarget;
       let width = loadedImage.width;
       let height = loadedImage.height;
 
-        // ratio = maxWidth / width;   // get ratio for scaling image
-        // height = height * ratio;    // Reset height to match scaled image
-        // width = width * ratio;    // Reset width to match scaled image
+      // ratio = maxWidth / width;   // get ratio for scaling image
+      // height = height * ratio;    // Reset height to match scaled image
+      // width = width * ratio;    // Reset width to match scaled image
 
-        if (width > height) {
-          if (width > maxWidth) {
-            ratio = maxWidth / width;   // get ratio for scaling image
-            height = height * ratio;    // Reset height to match scaled image
-            width = width * ratio;    // Reset width to match scaled image
-          }
+      if (width > height) {
+        if (width > maxWidth) {
+          ratio = maxWidth / width; // get ratio for scaling image
+          height = height * ratio; // Reset height to match scaled image
+          width = width * ratio; // Reset width to match scaled image
         }
-        else {
-            if (height > maxHeight) {
-              ratio = maxHeight / height; // get ratio for scaling image
-              width = width * ratio;    // Reset width to match scaled image
-              height = height * ratio;    // Reset height to match scaled image
-            }
+      } else {
+        if (height > maxHeight) {
+          ratio = maxHeight / height; // get ratio for scaling image
+          width = width * ratio; // Reset width to match scaled image
+          height = height * ratio; // Reset height to match scaled image
         }
+      }
 
-        this.processedImages[index].Resize_Max_Width = parseInt(width);
-        (Max_Width as HTMLInputElement).value = parseInt(width).toString();
+      this.processedImages[index].Resize_Max_Width = parseInt(width);
+      (Max_Width as HTMLInputElement).value = parseInt(width).toString();
 
-        this.processedImages[index].Resize_Max_Height = parseInt(height);
-        (Max_Height as HTMLInputElement).value = parseInt(height).toString();
-      })
+      this.processedImages[index].Resize_Max_Height = parseInt(height);
+      (Max_Height as HTMLInputElement).value = parseInt(height).toString();
+    };
   }
 
   onKeyMaxHeight(event: any, index: any) {
@@ -463,20 +471,21 @@ export class FileListComponent implements OnInit {
     // console.log("index ", index)
     // console.log(this.processedImages[index])
 
-    const Max_Width = document.getElementById('MaxWidth_'+index);
-    const Max_Height = document.getElementById('MaxHeight_'+index);
+    const Max_Width = document.getElementById('MaxWidth_' + index);
+    const Max_Height = document.getElementById('MaxHeight_' + index);
 
     // this.processedImages[index].Resize_Max_Height = parseInt(event.target.value);
 
     var maxWidth = parseInt(event.target.value); // Max width for the image
-    var maxHeight = parseInt(event.target.value);    // Max height for the image
-    var ratio = 0;  // Used for aspect ratio
+    var maxHeight = parseInt(event.target.value); // Max height for the image
+    var ratio = 0; // Used for aspect ratio
 
     let img = new Image();
 
-    img.src = this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
-    img.onload = ((event: any) => {
-      let  loadedImage = event.currentTarget;
+    img.src =
+      this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
+    img.onload = (event: any) => {
+      let loadedImage = event.currentTarget;
       let width = loadedImage.width;
       let height = loadedImage.height;
 
@@ -487,24 +496,23 @@ export class FileListComponent implements OnInit {
       if (height > width) {
         if (height > maxHeight) {
           ratio = maxHeight / height; // get ratio for scaling image
-          width = width * ratio;    // Reset width to match scaled image
-          height = height * ratio;    // Reset height to match scaled image
+          width = width * ratio; // Reset width to match scaled image
+          height = height * ratio; // Reset height to match scaled image
         }
-      }else {
-          if (width > maxWidth) {
-            ratio = maxWidth / width;   // get ratio for scaling image
-            height = height * ratio;    // Reset height to match scaled image
-            width = width * ratio;    // Reset width to match scaled image
-          }
+      } else {
+        if (width > maxWidth) {
+          ratio = maxWidth / width; // get ratio for scaling image
+          height = height * ratio; // Reset height to match scaled image
+          width = width * ratio; // Reset width to match scaled image
         }
+      }
 
       this.processedImages[index].Resize_Max_Width = parseInt(width);
       (Max_Width as HTMLInputElement).value = parseInt(width).toString();
 
       this.processedImages[index].Resize_Max_Height = parseInt(height);
       (Max_Height as HTMLInputElement).value = parseInt(height).toString();
-
-    })
+    };
   }
 
   onKeyQuality(event: any, index: any) {
@@ -513,5 +521,4 @@ export class FileListComponent implements OnInit {
     // console.log(this.processedImages[index])
     this.processedImages[index].Resize_Quality = parseInt(event.target.value);
   }
-
 }

@@ -21,7 +21,7 @@
     <div class="example-box row" *ngFor="let item of processedImages, let i = index" cdkDrag>
       <div style="position: relative;">
         <div cdkDragHandle
-          style="position: absolute;top: -13px;right: -13px; cursor: move;width: 45px; text-align: center; display: flex; align-items: center; justify-content: center;">
+          style="position: absolute;top: -8px;right: -8px; cursor: move;width: 45px; text-align: center; display: flex; align-items: center; justify-content: center;">
           <span class="material-symbols-outlined">
             drag_handle
           </span>
@@ -31,10 +31,10 @@
       <div class="col-lg-7 col-md-12"
         style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0; ">
         <div class="row" style="width: 100%; padding: 0; margin: 0;">
-          <div class="col-lg-5 col-md-5" style="text-align: center;display: flex;justify-content: center;align-items: center;margin-top: 10px;margin-bottom: 10px;">
-            <img [src]="item.url" *ngIf="item.url!=null && item.compress.length == 0" style="max-height: 180px;">
+          <div class="col-lg-5 col-md-5" style="text-align: center;display: flex;justify-content: center;align-items: center;margin-bottom: 5px;">
+            <img [src]="item.url" *ngIf="item.url!=null && item.compress.length == 0" style="max-height: 120px;">
             <img [src]="item.compress[0].compressedImage.imageDataUrl" *ngIf="item.compress.length > 0"
-              style="max-height: 180px;border: 1px solid green;">
+              style="max-height: 120px;border: 1px solid green;">
           </div>
           <div class="col-lg-7 col-md-7"
             style="min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;padding: 0;margin: 0;">
