@@ -56,6 +56,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: center;
 }
 
+.background-success-snackbar {
+  background: #198754;
+  color: #fff;
+  height: 60px;
+  display: grid !important;
+  align-items: center;
+}
+
 .mat-simple-snackbar-action {
   color: #ffffff;
 }
