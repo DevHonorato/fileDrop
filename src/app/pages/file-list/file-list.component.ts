@@ -29,7 +29,7 @@ class FileEdit {
   compress?: [];
   sizeCompress?: string;
   stadoCompress: any = null;
-  Resize_Max_Height: number = 1080;
+  Resize_Max_Height: number = 1280;
   Resize_Max_Width: number = 1920;
   Resize_Quality: number = 50;
 }
@@ -70,7 +70,7 @@ export class FileListComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          console.log('file', file);
+          // console.log('file', file);
           if (file.type.includes('image/')) {
             try {
               const url = this.generatorUrl(file);
@@ -101,6 +101,10 @@ export class FileListComponent implements OnInit {
               this.processedImages.push(novoArray);
               // console.log("this.fileCompress",this.fileCompress)
               // console.log("this.processedImages",this.processedImages)
+
+              const ultimo = this.processedImages.length - 1
+
+              this.maxWidth_maxHeight(ultimo)
 
               // Here you can access the real file
               // console.log(droppedFile.relativePath, file);
@@ -210,7 +214,7 @@ export class FileListComponent implements OnInit {
 
     let option: ResizeOptions = new ResizeOptions();
 
-    console.log("fullFileObj ", fullFileObj)
+    // console.log("fullFileObj ", fullFileObj)
 
     if (fileInput[0].type == 'image/png') {
       // let option: ResizeOptions  = { Resize_Max_Height  : 1080 , Resize_Max_Width : 1920, Resize_Quality : 70 , Resize_Type : 'png'  }
@@ -260,7 +264,7 @@ export class FileListComponent implements OnInit {
               );
 
             // // console.log("this.processedImages ",this.processedImages[0].imageDataUrl.match(/:(.+\/.+);/)[1]);
-            console.log('this.processedImages ', this.processedImages);
+            // console.log('this.processedImages ', this.processedImages);
             this.processedImages[i].stadoCompress = false;
 
             // const src = image.imageDataUrl;
@@ -360,24 +364,154 @@ export class FileListComponent implements OnInit {
     botao?.click();
   }
 
+  maxWidth_maxHeight(index: any) {
+    // console.log("event ", event.target.value)
+    // console.log("index ", index)
+    // console.log(this.processedImages[index])
+
+    // this.processedImages[index].Resize_Max_Width = parseInt(event.target.value);
+
+    let maxWidth = parseInt(this.processedImages[index].Resize_Max_Width); // Max width for the image
+    let maxHeight = parseInt(this.processedImages[index].Resize_Max_Width);    // Max height for the image
+    let ratio = 0;  // Used for aspect ratio
+
+    let img = new Image();
+
+    img.src = this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
+    img.onload = ((event: any) => {
+      let  loadedImage = event.currentTarget;
+      let width = loadedImage.width;
+      let height = loadedImage.height;
+
+        // ratio = maxWidth / width;   // get ratio for scaling image
+        // height = height * ratio;    // Reset height to match scaled image
+        // width = width * ratio;    // Reset width to match scaled image
+
+        if (width > height) {
+          if (width > maxWidth) {
+            ratio = maxWidth / width;   // get ratio for scaling image
+            height = height * ratio;    // Reset height to match scaled image
+            width = width * ratio;    // Reset width to match scaled image
+          }
+        }
+        else {
+            if (height > maxHeight) {
+              ratio = maxHeight / height; // get ratio for scaling image
+              width = width * ratio;    // Reset width to match scaled image
+              height = height * ratio;    // Reset height to match scaled image
+            }
+        }
+
+        this.processedImages[index].Resize_Max_Width = parseInt(width);
+
+        this.processedImages[index].Resize_Max_Height = parseInt(height);
+
+      })
+  }
+
   onKeyMaxWidth(event: any, index: any) {
-    console.log("event ", event.target.value)
-    console.log("index ", index)
-    console.log(this.processedImages[index])
-    this.processedImages[index].Resize_Max_Width = parseInt(event.target.value);
+    // console.log("event ", event.target.value)
+    // console.log("index ", index)
+    // console.log(this.processedImages[index])
+
+    const Max_Width = document.getElementById('MaxWidth_'+index);
+    const Max_Height = document.getElementById('MaxHeight_'+index);
+
+    // this.processedImages[index].Resize_Max_Width = parseInt(event.target.value);
+
+    let maxWidth = parseInt(event.target.value); // Max width for the image
+    let maxHeight = parseInt(event.target.value);    // Max height for the image
+    let ratio = 0;  // Used for aspect ratio
+
+    let img = new Image();
+
+    img.src = this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
+    img.onload = ((event: any) => {
+      let  loadedImage = event.currentTarget;
+      let width = loadedImage.width;
+      let height = loadedImage.height;
+
+        // ratio = maxWidth / width;   // get ratio for scaling image
+        // height = height * ratio;    // Reset height to match scaled image
+        // width = width * ratio;    // Reset width to match scaled image
+
+        if (width > height) {
+          if (width > maxWidth) {
+            ratio = maxWidth / width;   // get ratio for scaling image
+            height = height * ratio;    // Reset height to match scaled image
+            width = width * ratio;    // Reset width to match scaled image
+          }
+        }
+        else {
+            if (height > maxHeight) {
+              ratio = maxHeight / height; // get ratio for scaling image
+              width = width * ratio;    // Reset width to match scaled image
+              height = height * ratio;    // Reset height to match scaled image
+            }
+        }
+
+        this.processedImages[index].Resize_Max_Width = parseInt(width);
+        (Max_Width as HTMLInputElement).value = parseInt(width).toString();
+
+        this.processedImages[index].Resize_Max_Height = parseInt(height);
+        (Max_Height as HTMLInputElement).value = parseInt(height).toString();
+      })
   }
 
   onKeyMaxHeight(event: any, index: any) {
-    console.log("event ", event.target.value)
-    console.log("index ", index)
-    console.log(this.processedImages[index])
-    this.processedImages[index].Resize_Max_Height = parseInt(event.target.value);
+    // console.log("event ", event.target.value)
+    // console.log("index ", index)
+    // console.log(this.processedImages[index])
+
+    const Max_Width = document.getElementById('MaxWidth_'+index);
+    const Max_Height = document.getElementById('MaxHeight_'+index);
+
+    // this.processedImages[index].Resize_Max_Height = parseInt(event.target.value);
+
+    var maxWidth = parseInt(event.target.value); // Max width for the image
+    var maxHeight = parseInt(event.target.value);    // Max height for the image
+    var ratio = 0;  // Used for aspect ratio
+
+    let img = new Image();
+
+    img.src = this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
+    img.onload = ((event: any) => {
+      let  loadedImage = event.currentTarget;
+      let width = loadedImage.width;
+      let height = loadedImage.height;
+
+      // ratio = maxHeight / height; // get ratio for scaling image
+      // width = width * ratio;    // Reset width to match scaled image
+      // height = height * ratio;    // Reset height to match scaled image
+
+      if (height > width) {
+        if (height > maxHeight) {
+          ratio = maxHeight / height; // get ratio for scaling image
+          width = width * ratio;    // Reset width to match scaled image
+          height = height * ratio;    // Reset height to match scaled image
+        }
+      }else {
+          if (width > maxWidth) {
+            ratio = maxWidth / width;   // get ratio for scaling image
+            height = height * ratio;    // Reset height to match scaled image
+            width = width * ratio;    // Reset width to match scaled image
+          }
+        }
+
+      this.processedImages[index].Resize_Max_Width = parseInt(width);
+      (Max_Width as HTMLInputElement).value = parseInt(width).toString();
+
+      this.processedImages[index].Resize_Max_Height = parseInt(height);
+      (Max_Height as HTMLInputElement).value = parseInt(height).toString();
+
+    })
   }
 
   onKeyQuality(event: any, index: any) {
-    console.log("event ", event.target.value)
-    console.log("index ", index)
-    console.log(this.processedImages[index])
+    // console.log("event ", event.target.value)
+    // console.log("index ", index)
+    // console.log(this.processedImages[index])
     this.processedImages[index].Resize_Quality = parseInt(event.target.value);
   }
+
 }
