@@ -6,7 +6,8 @@
         "start": "ng serve",
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
-        "ghpages": "npx angular-cli-ghpages –dir=dist"
+        "ghpages": "npx angular-cli-ghpages –dir=dist",
+        "buildProd": "ng build --prod --base-href=/fileDrop"
     },
     "private": true,
     "dependencies": {

@@ -22,7 +22,7 @@
       <div style="position: relative;">
         <div cdkDragHandle
           style="position: absolute;top: -8px;right: -8px; cursor: move;width: 45px; text-align: center; display: flex; align-items: center; justify-content: center;">
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined notranslate" translate="no">
             drag_handle
           </span>
         </div>
@@ -31,16 +31,22 @@
       <div class="col-lg-7 col-md-12"
         style=" display: flex;flex-direction: row;align-items: center;padding: 0;margin: 0; ">
         <div class="row" style="width: 100%; padding: 0; margin: 0;">
-          <div class="col-lg-5 col-md-5" style="text-align: center;display: flex;justify-content: center;align-items: center;margin-bottom: 5px;">
-            <img [src]="item.url" *ngIf="item.url!=null && item.compress.length == 0" style="max-height: 120px;">
+          <div class="col-lg-5 col-md-5"
+            style="text-align: center;display: flex;justify-content: center;align-items: center;margin-bottom: 5px;">
+            <img [src]="item.url" *ngIf="item.url!=null && item.compress.length == 0"
+              style="max-height: 120px;margin: 10px 0px;">
             <img [src]="item.compress[0].compressedImage.imageDataUrl" *ngIf="item.compress.length > 0"
-              style="max-height: 120px;border: 1px solid green;">
+              style="max-height: 120px;margin: 10px 0px;">
           </div>
           <div class="col-lg-7 col-md-7"
             style="min-height: 120px;display: flex;flex-direction: column;flex-wrap: wrap;justify-content: center;padding: 0;margin: 0;">
 
             <div class="p-0 m-1"
-              style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
+              style="display: flex;align-content: center;align-items: center;justify-content: flex-start;height: 25px;">
+              <span class="material-symbols-outlined notranslate" translate="no"
+                style=" font-size: 16px; margin-right: 5px; ">
+                photo_size_select_actual
+              </span>
               <strong>{{redutorDeNome(item.name, 60)}}</strong>
             </div>
 
@@ -56,17 +62,19 @@
 
               <div style="width: 100%; text-align: end;">
                 <a *ngIf="item.url != null" (click)="goToLink(item.url['changingThisBreaksApplicationSecurity'])"
-                  style="cursor: pointer;" title="Open in new tab">
-                  <span class="material-symbols-outlined" title="Open in new tab">open_in_new</span>
+                  style="cursor: pointer;color: #000;" title="Open in new tab">
+                  <span class="material-symbols-outlined notranslate" translate="no"
+                    title="Open in new tab">open_in_new</span>
                 </a>
               </div>
             </div>
 
 
             <div class="p-0 m-1"
-              style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;">
+              style="display: flex; align-content: center; align-items: center; justify-content: space-between;height: 25px;"
+              *ngIf="item.type == 'image/jpeg' || item.type == 'image/png'">
               <div style=" width: 100%; ">
-                Size Compress:
+                Size compressed:
               </div>
 
               <div style="width: 100%; text-align: center;">
@@ -75,8 +83,9 @@
 
               <div style="width: 100%; text-align: end;">
                 <a *ngIf="item.compress.length > 0" (click)="goToLink(item.compress[0].compressedImage.imageObjectUrl)"
-                  style="cursor: pointer;" title="Open in new tab">
-                  <span class="material-symbols-outlined" title="Open in new tab">open_in_new</span>
+                  style="cursor: pointer;color: #000;" title="Open in new tab">
+                  <span class="material-symbols-outlined notranslate" translate="no"
+                    title="Open in new tab">open_in_new</span>
                 </a>
               </div>
             </div>
@@ -85,12 +94,13 @@
               <span class="p-0 m-1"
                 style=" display: flex; justify-content: space-between; font-weight: bold; cursor: pointer; "
                 (click)="accordionItem.toggle()"><span style=" display: flex; align-items: center; ">
-                  <span class="material-symbols-outlined" style=" font-size: 16px; margin-right: 5px; ">
+                  <span class="material-symbols-outlined notranslate" translate="no"
+                    style=" font-size: 16px; margin-right: 5px; ">
                     settings
                   </span>
                   Compress configuration
                 </span>
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined notranslate" translate="no">
                   {{ accordionItem.expanded ? 'arrow_drop_up' : 'arrow_drop_down' }}
                 </span>
               </span>
@@ -102,27 +112,41 @@
                 <div role="region" [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-'"
                   [attr.aria-labelledby]="'accordion-header-'" class="example-accordion-item">
 
-
-                  <div class="p-0 m-1" style="text-align: center;display: flex;flex-direction: column;align-items: center;">
-                    <label [for]="'MaxWidth_' + (i)" class="form-label p-0 m-0">Max Width</label>
-                    <input type="number" class="form-control" [value]="item.Resize_Max_Width"
-                      [id]="'MaxWidth_' + (i)" (change)="onKeyMaxWidth($event, i)"
+                  <div style=" display: flex; width: 100%; align-items: center; justify-content: space-around; flex-wrap: nowrap; flex-direction: row; margin-bottom: 5px; ">
+                  <div class="p-0 m-1"
+                    style="text-align: center;display: flex;flex-direction: column;align-items: center;">
+                    <label [for]="'MaxWidth_' + (i)" class="form-label p-0 m-1">Max Width</label>
+                    <input type="number" class="form-control" [value]="item.Resize_Max_Width" [id]="'MaxWidth_' + (i)"
+                      (change)="onKeyMaxWidth($event, i)"
                       style="width: 100%;height: 20px;font-size: 13px;text-align: center;">
                   </div>
-                  <div class="p-0 m-1" style="text-align: center;display: flex;flex-direction: column;align-items: center;">
-                    <label [for]="'MaxHeight_' + (i)" class="form-label p-0 m-0">Max Height</label>
-                    <input type="number" class="form-control" [value]="item.Resize_Max_Height"
-                      [id]="'MaxHeight_' + (i)" (change)="onKeyMaxHeight($event, i)"
+                  <div class="p-0 m-1"
+                    style="text-align: center;display: flex;flex-direction: column;align-items: center;">
+                    <label [for]="'MaxHeight_' + (i)" class="form-label p-0 m-1">Max Height</label>
+                    <input type="number" class="form-control" [value]="item.Resize_Max_Height" [id]="'MaxHeight_' + (i)"
+                      (change)="onKeyMaxHeight($event, i)"
                       style="width: 100%;height: 20px;font-size: 13px;text-align: center;">
                   </div>
-                  <div class="p-0 m-1" style="text-align: center;display: flex;flex-direction: column;align-items: center;">
-                    <label [for]="'Quality_' + (i)" class="form-label p-0 m-0">Quality</label>
-                    <input type="number" class="form-control" [value]="item.Resize_Quality"
-                      [id]="'Quality_' + (i)" (change)="onKeyQuality($event, i)"
+                  <div class="p-0 m-1"
+                    style="text-align: center;display: flex;flex-direction: column;align-items: center;">
+                    <label [for]="'Quality_' + (i)" class="form-label p-0 m-1">Quality</label>
+                    <input type="number" class="form-control" [value]="item.Resize_Quality" [id]="'Quality_' + (i)"
+                      (change)="onKeyQuality($event, i)"
                       style="width: 100%;height: 20px;font-size: 13px;text-align: center;">
                   </div>
                 </div>
+
+                <div>
+                  <div class="m-1" style="width: 100%;font-size: 12px;display: flex;flex-direction: column;align-items: center;background: #f1f1f1;border-radius: 10px;padding: 10px !important;flex-wrap: wrap;" >
+                    <!-- <span class="material-symbols-outlined notranslate" translate="no" style="font-size: 16px; margin-right: 5px;"> info </span> -->
+                    <span>The aspect ratio is calculated based on the size and quality of the original image. If the quality does not allow it, the width and height will not exceed the original values of the image ({{item.widthOriginal}}X{{item.heightOriginal}})</span>
+                  </div>
+                </div>
+
+              </div>
+
               </cdk-accordion-item>
+
             </cdk-accordion>
 
           </div>
@@ -152,7 +176,7 @@
 
             Compress
 
-            <span class="material-symbols-outlined" style="font-size: 15px;"
+            <span class="material-symbols-outlined notranslate" translate="no" style="font-size: 15px;"
               *ngIf="item.stadoCompress != null && item.stadoCompress == false">
               check_circle
             </span>
