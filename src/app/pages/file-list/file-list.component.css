@@ -112,8 +112,8 @@
   width: 100%;
   align-items: center;
   justify-content: space-around;
-  flex-wrap: nowrap;
-  flex-direction: row;
+  flex-direction: column;
+  cursor: inherit;
 }
 
 .example-accordion-item-description {

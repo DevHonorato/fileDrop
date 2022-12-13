@@ -35,6 +35,8 @@ class FileEdit {
   cropped?: any[] = [];
   sizeCompress?: string;
   stadoCompress: any = null;
+  widthOriginal: number = 0;
+  heightOriginal: number = 0;
   Resize_Max_Height: number = 1280;
   Resize_Max_Width: number = 1920;
   Resize_Quality: number = 50;
@@ -438,6 +440,9 @@ export class FileListComponent implements OnInit {
       this.processedImages[index].Resize_Max_Width = parseInt(width);
 
       this.processedImages[index].Resize_Max_Height = parseInt(height);
+
+      this.processedImages[index].widthOriginal = parseInt(width);
+      this.processedImages[index].heightOriginal = parseInt(height);
     };
   }
 
