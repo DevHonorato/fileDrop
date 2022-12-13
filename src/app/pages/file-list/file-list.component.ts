@@ -20,13 +20,19 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
+import { MatDialog } from '@angular/material/dialog';
+import { ModalEditComponent } from "../../components/modal-edit/modal-edit.component";
+import { async } from '@angular/core/testing';
+
 class FileEdit {
   name?: string;
   type?: string;
   url?: SafeUrl;
   file?: File;
+  base64File: any = "";
   sizeFile?: string;
   compress?: [];
+  cropped?: any[] = [];
   sizeCompress?: string;
   stadoCompress: any = null;
   widthOriginal: number = 0;
@@ -55,7 +61,8 @@ export class FileListComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private notificacaoService: NotificacaoService,
-    private imgCompressService: ImageCompressService
+    private imgCompressService: ImageCompressService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +78,7 @@ export class FileListComponent implements OnInit {
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
+        fileEntry.file(async (file: File) => {
           // console.log('file', file);
           if (file.type.includes('image/')) {
             try {
@@ -99,6 +106,8 @@ export class FileListComponent implements OnInit {
 
               novoArray.sizeFile = this.sizeFile(novoArray.file?.size);
               novoArray.sizeCompress = ' - ';
+
+              novoArray.base64File = await this.toBase64(file);
 
               this.processedImages.push(novoArray);
               // console.log("this.fileCompress",this.fileCompress)
@@ -143,7 +152,7 @@ export class FileListComponent implements OnInit {
               3000
             );
 
-            console.log('Only images are allowed');
+            // console.log('Only images are allowed');
           }
         });
       } else {
@@ -346,6 +355,21 @@ export class FileListComponent implements OnInit {
     }
   }
 
+  deleteAllItem() {
+
+    this.processedImages = [];
+
+    this.notificacaoService.openSnackBar(
+      'Successfully deleted All',
+      'OK',
+      'background-danger-snackbar',
+      'center',
+      'top',
+      1500
+    );
+
+  }
+
   compress(item: any, i: any) {
     let obj = [];
     let index = this.processedImages.indexOf(item);
@@ -526,4 +550,92 @@ export class FileListComponent implements OnInit {
     // console.log(this.processedImages[index])
     this.processedImages[index].Resize_Quality = parseInt(event.target.value);
   }
+
+  openDialog(item: any, index: any) {
+
+    const dialogRef = this.dialog.open(ModalEditComponent, {
+
+      autoFocus: true,
+      hasBackdrop: true,
+      disableClose: true,
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'full-screen-modal',
+      data: {
+        message: 'Are you sure want to delete?',
+        buttonText: {
+          ok: 'Save Edit',
+          cancel: 'Cancel'
+        },
+        item: item,
+        index: index
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+
+      // console.log(this.processedImages)
+      // console.log(result);
+
+      if(result.data != undefined){
+        // this.processedImages[result.id].Resize_Max_Height = result.data[0].Resize_Max_Height;
+        // this.processedImages[result.id].Resize_Max_Width = result.data[0].Resize_Max_Width;
+        // this.processedImages[result.id].Resize_Quality = result.data[0].Resize_Quality;
+        this.processedImages[result.id].base64File = result.data[0].base64File;
+        this.processedImages[result.id].compress = result.data[0].compress;
+        this.processedImages[result.id].cropped = result.data[0].cropped;
+        this.processedImages[result.id].file = result.data[0].file;
+        this.processedImages[result.id].name = result.data[0].name;
+        this.processedImages[result.id].sizeCompress = result.data[0].sizeCompress;
+        this.processedImages[result.id].sizeFile = result.data[0].sizeFile;
+        this.processedImages[result.id].stadoCompress = result.data[0].stadoCompress;
+        this.processedImages[result.id].type = result.data[0].type;
+        this.processedImages[result.id].url = result.data[0].url;
+
+        this.maxWidth_maxHeight(result.id);
+      }
+
+
+
+      // console.log(this.processedImages)
+
+    });
+  }
+
+  async toBase64(file: any) {
+    const reader = new FileReader();
+    const start2 = async () =>
+      new Promise((resolve) => {
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+      });
+
+    return await start2();
+  }
+
+  downloadAllImagens(){
+
+    for (let index = 0; index < this.processedImages.length; index++) {
+      const element = this.processedImages[index];
+
+      var tag = document.createElement('a');
+      tag.href = element.url['changingThisBreaksApplicationSecurity'];
+      tag.download = element.name;
+      document.body.appendChild(tag);
+      tag.click();
+      document.body.removeChild(tag);
+    }
+
+  }
+
+
 }
+
+// @Component({
+//   selector: 'app-modal-edit',
+//   templateUrl: '../../components/modal-edit/modal-edit.component.html',
+//   styleUrls: ['../../components/modal-edit/modal-edit.component.css']
+// })
+// export class ModalEditComponent{}

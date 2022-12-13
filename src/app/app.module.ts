@@ -18,15 +18,22 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatDialogModule } from '@angular/material/dialog';
+
+
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 import { ImageCompressService,ResizeOptions,ImageUtilityService } from 'ng2-image-compress';
 import { FileListComponent } from './pages/file-list/file-list.component';
 import { FileDragAndDropComponent } from './pages/file-drag-and-drop/file-drag-and-drop.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ModalEditComponent } from './components/modal-edit/modal-edit.component';
 
 
 @NgModule({
@@ -35,7 +42,8 @@ import { FooterComponent } from './components/footer/footer.component';
     FileListComponent,
     FileDragAndDropComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    ModalEditComponent
   ],
   imports: [
     BrowserModule,
@@ -52,8 +60,10 @@ import { FooterComponent } from './components/footer/footer.component';
     MatIconModule,
     MatListModule,
     MatTabsModule,
+    MatDialogModule,
     DragDropModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    ImageCropperModule
   ],
   providers: [ImageCompressService,ResizeOptions],
   bootstrap: [AppComponent]
