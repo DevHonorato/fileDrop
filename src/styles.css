@@ -67,3 +67,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-simple-snackbar-action {
   color: #ffffff;
 }
+
+.full-screen-modal{
+  padding: 1em;
+  width: 100%;
+  height: 100%;
+  cursor: initial;
+}
+
+.full-screen-modal .mat-dialog-container {
+  padding: 1em;
+  width: 100%;
+  height: 100%;
+  cursor: initial;
+}
