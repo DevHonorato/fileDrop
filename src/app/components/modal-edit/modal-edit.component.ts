@@ -306,7 +306,7 @@ export class ModalEditComponent implements OnInit {
     // }
     // console.log('saveImgcroped', this.imageobjComolete.base64);
     // console.log('this.croppedImage', this.croppedImage);
-    // console.log('this.data.item', this.data.item);
+    console.log('this.data.item', this.data.item);
   }
 
   async generatorUrl(file: any) {
