@@ -438,6 +438,9 @@ export class FileListComponent implements OnInit {
       this.processedImages[index].Resize_Max_Width = parseInt(width);
 
       this.processedImages[index].Resize_Max_Height = parseInt(height);
+
+      this.processedImages[index].widthOriginal = parseInt(width);
+      this.processedImages[index].heightOriginal = parseInt(height);
     };
   }
 
