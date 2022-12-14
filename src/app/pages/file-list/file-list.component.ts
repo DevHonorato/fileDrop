@@ -404,8 +404,8 @@ export class FileListComponent implements OnInit {
 
     // this.processedImages[index].Resize_Max_Width = parseInt(event.target.value);
 
-    let maxWidth = parseInt(this.processedImages[index].Resize_Max_Width); // Max width for the image
-    let maxHeight = parseInt(this.processedImages[index].Resize_Max_Width); // Max height for the image
+    let maxWidth = 10000; // Max width for the image
+    let maxHeight = 10000; // Max height for the image
     let ratio = 0; // Used for aspect ratio
 
     let img = new Image();
