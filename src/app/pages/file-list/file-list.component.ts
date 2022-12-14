@@ -35,10 +35,8 @@ class FileEdit {
   cropped?: any[] = [];
   sizeCompress?: string;
   stadoCompress: any = null;
-  widthOriginal: number = 0;
-  heightOriginal: number = 0;
-  Resize_Max_Height: number = 1280;
-  Resize_Max_Width: number = 1920;
+  Resize_Max_Height: number = 10000;
+  Resize_Max_Width: number = 10000;
   Resize_Quality: number = 50;
 }
 
@@ -111,7 +109,7 @@ export class FileListComponent implements OnInit {
 
               this.processedImages.push(novoArray);
               // console.log("this.fileCompress",this.fileCompress)
-              // console.log("this.processedImages",this.processedImages)
+              console.log("this.processedImages",this.processedImages)
 
               const ultimo = this.processedImages.length - 1;
 
@@ -413,7 +411,7 @@ export class FileListComponent implements OnInit {
     let img = new Image();
 
     img.src =
-      this.processedImages[index].url['changingThisBreaksApplicationSecurity'];
+      this.processedImages[index].base64File;
     img.onload = (event: any) => {
       let loadedImage = event.currentTarget;
       let width = loadedImage.width;
